@@ -1,1 +1,18 @@
-<h1><%= @user.name %></h1>
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @user.works.any? %>
+      <ol class="works">
+        <%= render @works %>
+      </ol>
+      <%= will_paginate @works %>
+    <% end %>
+  </div>
+</div>

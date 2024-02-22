@@ -8,6 +8,33 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script>
+      function clockIn() {
+        // 出勤ボタンがクリックされたときの処理
+        if (confirm('本当に出勤しますか？')) {
+          document.getElementById('work_start_time').value = getCurrentTime();
+        }
+      }
+
+      function clockOut() {
+        // 退勤ボタンがクリックされたときの処理
+        if (confirm('本当に退勤しますか？')) {
+          document.getElementById('work_end_time').value = getCurrentTime();
+        }
+      }
+
+      function getCurrentTime() {
+        // 現在の時刻を取得する関数
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+
+        hours = hours < 10 ? '0' + hours : hours;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        return hours + ':' + minutes;
+      }
+    </script>
   </head>
   <body>
     <%= render 'layouts/header' %>
