@@ -9,10 +9,34 @@
   </aside>
   <div class="col-md-12 text-center">
     <% if @user.works.any? %>
-      <ol class="works list-unstyled">
-        <%= render @works %>
-      </ol>
-      <%= will_paginate @works %>
+      <%= form_tag(user_path(@user), method: :get) do %>
+        <%= label_tag :year, "年：" %>
+        <%= select_tag :year, options_for_select((Date.today.year - 5)..(Date.today.year + 5), @selected_year.to_i), prompt: "選択してください" %>
+
+        <%= label_tag :month, "月：" %>
+        <%= select_tag :month, options_for_select(1..12, @selected_month.to_i), prompt: "選択してください" %>
+
+        <%= submit_tag "表示" %>
+      <% end %> 
     <% end %>
+    <table>
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>出勤時間</th>
+          <th>退勤時間</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @works.each do |work| %>
+          <tr>
+            <td><%= work.date.strftime("%Y-%m-%d") %></td>
+            <td><%= work.start_time.strftime("%H:%M") %></td>
+            <td><%= work.end_time ? work.end_time.strftime("%H:%M") : "未退勤" %></td>
+            <!-- 他のカラムも必要に応じて追加 -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

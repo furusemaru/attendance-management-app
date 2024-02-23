@@ -8,7 +8,24 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @works = @user.works.paginate(page: params[:page])
+    @selected_year = params[:year] || Date.today.year
+    @selected_month = params[:month] || Date.today.month
+    if @selected_month.class != Integer
+      if @selected_month.to_i < 10
+        @selected_month = "0" + @selected_month 
+      end
+    else
+      if @selected_month < 10
+        @selected_month = '0' + @selected_month.to_s
+      else
+        @selected_month.to_s!    
+      end
+    end
+
+    # 選択された年月に基づいてデータを取得
+    @works = @user.works.where("strftime('%Y', date) = ? AND strftime('%m', date)  = ?", @selected_year, @selected_month)
+    
+    
   end
 
   def create

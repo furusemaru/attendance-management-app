@@ -16,10 +16,10 @@ User.create!(name:  "Example User",
                password_confirmation: password)
 end
 
-start_day = Date.new(2020, 6, 22)
+start_day = Date.new(2022, 1, 1)
 end_day = Date.new(2024, 2, 20)
 
 users = User.order(:created_at).take(6)
-50.times do
+100.times do
   users.each { |user| user.works.create!(start_time: "09:00", end_time: "18:00", date: Random.rand(start_day..end_day) ) }
 end
