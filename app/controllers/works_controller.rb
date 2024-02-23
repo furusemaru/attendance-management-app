@@ -8,9 +8,11 @@ class WorksController < ApplicationController
       flash[:success] = "出勤記録が登録されました"
       redirect_to user_path(current_user)
     else
+
       render 'top_pages/home', status: :unprocessable_entity
     end
   end
+
 
   def destroy
   end

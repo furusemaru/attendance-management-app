@@ -3,6 +3,11 @@
 
 $gray-medium-light: #eaeaea;
 
+.display-4{
+  font-size: x-large;
+  margin-bottom: 1em;
+}
+
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -131,4 +136,68 @@ input {
   display: block;
 }
 
+/* 打刻ページ */
+
+.time-stamp .stamp-comment{
+  margin-top: 2em;
+  margin-bottom: 2em;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+}
+
+.start-field{
+  width: 40%;
+  height: 2em !important;
+}
+
+.start-btn{
+  margin-top: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.end-field{
+  width: 40%;
+  height: 2em !important;
+}
+
+.end-btn{
+  margin-top: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment-area{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stamp-comment-area{
+  width: 75%;
+}
+
+.register{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-group{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-btn{
+  width: 25%;
+
+}
 

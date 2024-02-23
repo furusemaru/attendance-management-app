@@ -1,35 +1,41 @@
 <% if logged_in? %>
-  <h1>打刻</h1>
+  <h1 id="current-date"></h1>
   <h1 id="current-time"></h1>
-  <div>
+  <div class='time-stamp'>
     <%= form_with(model: @work) do |f| %>
-      <div>
-        <%= f.label :date, "日付" %>
-        <%= f.date_field :date, required: true %>
-      </div>
+      
+      <%= f.hidden_field :date, id: 'hidden-date' %>
+      
+      <div class="row">
+        
+        <div class="col-md-6 text-center start-btn ">
+          <%= f.label :start_time, "出勤時間", class: "display-4" %>
+          <%= f.time_field :start_time, required: true, class: "start-field" %>
+          <!-- 出勤ボタン -->
+          <%= f.button "出勤", type: "button", onclick: "clockIn()", class: "btn btn-primary" %>
+        </div>
 
-      <div>
-        <%= f.label :start_time, "出勤時間" %>
-        <%= f.time_field :start_time, required: true %>
-        <!-- 出勤ボタン -->
-        <%= f.button "出勤", type: "button", onclick: "clockIn()" %>
-      </div>
+        <div class="col-md-6 text-center end-btn">
+          <%= f.label :end_time, "退勤時間", class: "display-4" %>
+          <%= f.time_field :end_time, required: true, class: "end-field" %>
+          <!-- 退勤ボタン -->
+          <%= f.button "退勤", type: "button", onclick: "clockOut()", class: "btn btn-danger" %>
+        </div>
 
-      <div>
-        <%= f.label :end_time, "退勤時間" %>
-        <%= f.time_field :end_time, required: true %>
-        <!-- 退勤ボタン -->
-        <%= f.button "退勤", type: "button", onclick: "clockOut()" %>
-      </div>
+        <div class="col-md-12 stamp-comment">
+          <div class="comment-area">
+            <%= f.label :comment, "コメント" %>
+            <%= f.text_area :comment ,class: "stamp-comment-area"%>
+          </div>
+        </div>
 
-      <div>
-        <%= f.label :comment, "コメント" %>
-        <%= f.text_area :comment %>
-      </div>
+        <!-- 登録ボタン -->
+        <div class="col-md-12 register">
+          <div class="register-group">
+            <%= f.submit "登録", class: "register-btn btn btn-warning"%>
+          </div>
+        </div>
 
-      <!-- 登録ボタン -->
-      <div>
-        <%= f.submit "登録" %>
       </div>
     </div>
   <% end %>
