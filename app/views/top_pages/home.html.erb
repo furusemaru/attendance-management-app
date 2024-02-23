@@ -10,14 +10,14 @@
         
         <div class="col-md-6 text-center start-btn ">
           <%= f.label :start_time, "出勤時間", class: "display-4" %>
-          <%= f.time_field :start_time, required: true, class: "start-field" %>
+          <%= f.time_field :start_time, required: true, class: "start-field", value: "09:00" %>
           <!-- 出勤ボタン -->
           <%= f.button "出勤", type: "button", onclick: "clockIn()", class: "btn btn-primary" %>
         </div>
 
         <div class="col-md-6 text-center end-btn">
           <%= f.label :end_time, "退勤時間", class: "display-4" %>
-          <%= f.time_field :end_time, required: true, class: "end-field" %>
+          <%= f.time_field :end_time, required: true, class: "end-field", value: "18:00" %>
           <!-- 退勤ボタン -->
           <%= f.button "退勤", type: "button", onclick: "clockOut()", class: "btn btn-danger" %>
         </div>

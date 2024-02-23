@@ -1,3 +1,4 @@
+require 'date'
 # メインのサンプルユーザーを1人作成する
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
@@ -15,8 +16,10 @@ User.create!(name:  "Example User",
                password_confirmation: password)
 end
 
+start_day = Date.new(2020, 6, 22)
+end_day = Date.new(2024, 2, 20)
+
 users = User.order(:created_at).take(6)
 50.times do
-  users.each { |user| user.works.create!(start_time: "start_time: Sat, 01 Jan 2000 18:31:00.000000000 UTC +00:00" ,
-  end_time: "Sat, 01 Jan 2000 18:32:00.000000000 UTC +00:00", date: "Tue, 20 Feb 2024" ) }
+  users.each { |user| user.works.create!(start_time: "09:00", end_time: "18:00", date: Random.rand(start_day..end_day) ) }
 end
