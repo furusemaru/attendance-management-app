@@ -8,6 +8,14 @@ $gray-medium-light: #eaeaea;
   margin-bottom: 1em;
 }
 
+.mt-1 {
+  margin-top: 1em !important;
+}
+
+.mt-2 {
+  margin-top: 2em !important;
+}
+
 .mt-3 {
   margin-top: 3em !important;
 }
@@ -205,3 +213,16 @@ input {
 
 }
 
+/* /user/show */
+
+.select-year{
+  width: auto;
+}
+
+.select-month{
+  width: auto;
+}
+
+.display-btn{
+  width: 40%;
+}

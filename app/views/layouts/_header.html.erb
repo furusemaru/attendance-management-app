@@ -13,7 +13,7 @@
       <ul id="navbar-menu" class="nav navbar-nav navbar-right collapse navbar-collapse">
         <% if logged_in? %>
           <li><%= link_to "打刻", root_path %></li>
-          <li><%= link_to "履歴", current_user %></li>
+          <li><%= link_to "勤務記録", user_url(current_user) %></li>
           <li><%= link_to "設定", edit_user_path(current_user) %></li>
           <li>
             <%= link_to "ログアウト", logout_path,

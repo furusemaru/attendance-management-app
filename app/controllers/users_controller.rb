@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :show, :index]
+  before_action :correct_user,   only: [:edit, :update, :show]
 
   def new
     @user = User.new
@@ -18,10 +18,13 @@ class UsersController < ApplicationController
       if @selected_month < 10
         @selected_month = '0' + @selected_month.to_s
       else
-        @selected_month.to_s!    
+        @selected_month = @selected_month.to_s
       end
     end
-
+    if @selected_year.class == Integer
+      @selected_year = @selected_year.to_s
+    end
+    
     # 選択された年月に基づいてデータを取得
     @works = @user.works.where("strftime('%Y', date) = ? AND strftime('%m', date)  = ?", @selected_year, @selected_month)
     
@@ -52,6 +55,10 @@ class UsersController < ApplicationController
     else
       render 'edit', status: :unprocessable_entity
     end
+  end
+
+  def index
+    @users = User.all
   end
 
   private
