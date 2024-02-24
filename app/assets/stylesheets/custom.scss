@@ -8,6 +8,10 @@ $gray-medium-light: #eaeaea;
   margin-bottom: 1em;
 }
 
+.mt-3 {
+  margin-top: 3em !important;
+}
+
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;

@@ -3,6 +3,7 @@
   <h1 id="current-time"></h1>
   <div class='time-stamp'>
     <%= form_with(model: @work) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
       
       <%= f.hidden_field :date, id: 'hidden-date' %>
       
@@ -40,6 +41,9 @@
     </div>
   <% end %>
 <% else %>
-  <h1>ログインしてください</h1>
+  <h1>勤怠管理システム</h1>
+  <div class="text-center mt-3" >
+    <%= link_to "ログイン", login_path, class: 'btn btn-primary' %>
+  </div>
 <% end %>
 
