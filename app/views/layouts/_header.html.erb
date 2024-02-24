@@ -2,7 +2,14 @@
   <div class="container">
     <%= link_to "勤怠管理", root_path, id: "logo" %>
     <nav>
-      
+      <div class="navbar-header">
+        <button id="hamburger" type="button" class="navbar-toggle collapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
       <ul id="navbar-menu" class="nav navbar-nav navbar-right collapse navbar-collapse">
         <% if logged_in? %>
           <li><%= link_to "打刻", root_path %></li>
