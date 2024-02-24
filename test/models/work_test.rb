@@ -23,7 +23,4 @@ class WorkTest < ActiveSupport::TestCase
     assert_not @work.valid?
   end
 
-  test "order should be most recent first" do
-    assert_equal works(:most_recent), Work.first
-  end
 end

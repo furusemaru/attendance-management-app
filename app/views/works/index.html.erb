@@ -1,14 +1,9 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, '勤怠記録') %>
+<h1>勤怠記録</h1>
+
 <div class="row">
-  <aside class="col-md-12">
-    <section class="user_info">
-      <h1>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
     <div class="col-md-12 text-center">
-      <%= form_tag(user_path(@user), method: :get) do %>
+      <%= form_tag(works_path, method: :get) do %>
         <div class="row">
           <div class="col-md-4 text-center mt-1">
             <%= label_tag :year, "年：" %>
@@ -18,6 +13,11 @@
           <div class="col-md-4 text-center mt-1">
             <%= label_tag :month, "月：" %>
             <%= select_tag :month, options_for_select(1..12, @selected_month.to_i), prompt: "選択してください", class: "select-month" %>
+          </div>
+
+          <div class="col-md-4 text-center mt-1">
+            <%= label_tag :day, "日：" %>
+            <%= select_tag :day, options_for_select(1..31, @selected_day.to_i), prompt: "選択してください", class: "select-day" %>
           </div>
 
           <div class="col-md-12 text-center mt-1 ">
@@ -32,6 +32,7 @@
               <th>日付</th>
               <th>出勤時間</th>
               <th>退勤時間</th>
+              <th>社員名</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +41,7 @@
                 <td><%= work.date.strftime("%Y-%m-%d") %></td>
                 <td><%= work.start_time.strftime("%H:%M") %></td>
                 <td><%= work.end_time ? work.end_time.strftime("%H:%M") : "未退勤" %></td>
+                <td><%= work.user.name %></td>
                 <!-- 他のカラムも必要に応じて追加 -->
               </tr>
             <% end %>
@@ -47,5 +49,4 @@
         </table>
       <% end %>
     </div>
-    
 </div>

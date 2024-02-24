@@ -1,4 +1,7 @@
-<% if logged_in? %>
+<% if admin_user? %>
+  <h1>管理者専用</h1>
+<% elsif logged_in? %>
+  <% provide(:title, '打刻') %>
   <h1 id="current-date"></h1>
   <h1 id="current-time"></h1>
   <div class='time-stamp'>

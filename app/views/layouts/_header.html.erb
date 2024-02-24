@@ -11,7 +11,16 @@
         </button>
       </div>
       <ul id="navbar-menu" class="nav navbar-nav navbar-right collapse navbar-collapse">
-        <% if logged_in? %>
+        <% if admin_user? %>
+          <li><%= link_to "社員記録", users_path %></li>
+          <li><%= link_to "勤怠記録", works_path %></li>
+          <li><%= link_to "新規ユーザー登録", new_user_path  %></li>
+          <li>
+            <%= link_to "ログアウト", logout_path,
+                                       data: { "turbo-method": :delete } %>
+          </li>
+        
+        <% elsif logged_in? %>
           <li><%= link_to "打刻", root_path %></li>
           <li><%= link_to "勤務記録", user_url(current_user) %></li>
           <li><%= link_to "設定", edit_user_path(current_user) %></li>
