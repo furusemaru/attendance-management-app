@@ -3,6 +3,8 @@
 
 $gray-medium-light: #eaeaea;
 
+
+/* bootstrap効かない */
 .display-4{
   font-size: x-large;
   margin-bottom: 1em;
@@ -20,6 +22,11 @@ $gray-medium-light: #eaeaea;
   margin-top: 3em !important;
 }
 
+.mb-3 {
+  margin-bottom: 3em !important;
+}
+
+/* standard */
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -191,6 +198,18 @@ input {
   align-items: center;
 }
 
+.break-time-area{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stamp-break-time-area{
+  width: 100px;
+  text-align: center;
+}
+
 .stamp-comment-area{
   width: 75%;
 }
@@ -240,4 +259,69 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+/*  表のデザイン */
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table_design08 {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  /* max-width: 700px;*/
+  text-align: center;
+}
+.table_design08 th, .table_design08 td {
+  border: 2px solid #d2e8f1;
+  padding: 0em;
+  text-align: center;
+}
+.table_design08 thead th {
+  background-color: #4d9bc1;
+  color: #fff;
+  border: 2px solid #4d9bc1;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+.table_design08 thead th:last-of-type {
+  border-right: 2px solid #4d9bc1;
+}
+.table_design08 tbody th {
+  color: #4d9bc1;
+  font-weight: bold;
+  text-align: center;
+}
+@media screen and (max-width: 787px) {
+  .table_design08 {
+    text-align: left;
+  }
+  .table_design08 thead {
+    display:none;
+  }
+  .table_design08 th, .table_design08 td {
+    display: block;
+    border: 0;
+    border-bottom: 2px solid #e6f1f6;
+  }
+  .table_design08 tbody th{
+    background: #4d9bc1;
+    color:#fff;
+  }
+  .table_design08 td::before{
+    content: attr(data-label);
+    color: #4d9bc1;
+    font-weight: bold;
+    display: inline-block;
+    width: 20%;
+    min-width: 4em;
+  }
+}
+
+/* ユーザー一覧 */
+.select-department{
+  width: auto;
 }

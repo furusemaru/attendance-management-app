@@ -50,15 +50,18 @@ class WorksController < ApplicationController
         @selected_day = @selected_day.to_s
       end
     end
-    
-    @works = Work.where("strftime('%Y', date) = ? AND strftime('%m', date)  = ? AND strftime('%d',date) = ?" , @selected_year, @selected_month, @selected_day)
-    
+    if !params[:department].present?
+      @works = Work.where("strftime('%Y', date) = ? AND strftime('%m', date)  = ? AND strftime('%d',date) = ?" , @selected_year, @selected_month, @selected_day)
+    else
+      @works = Work.joins(:user).where("strftime('%Y', date) = ? AND strftime('%m', date) = ? AND strftime('%d', date) = ? AND department = ?", @selected_year, @selected_month, @selected_day, params[:department])
+    end
+    @works = @works.paginate(page: params[:page])
   end
 
   private
 
     def work_params
-      params.require(:work).permit(:date, :comment, :start_time, :end_time)
+      params.require(:work).permit(:date, :comment, :start_time, :end_time, :break_time)
     end
 
     def correct_user

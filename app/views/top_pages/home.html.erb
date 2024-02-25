@@ -26,10 +26,17 @@
           <%= f.button "退勤", type: "button", onclick: "clockOut()", class: "btn btn-danger" %>
         </div>
 
+        <div class="col-md-12 stamp-break-time mt-3">
+          <div class="break-time-area">
+            <%= f.label :break_time, "休憩時間", class: "display-4"%>
+            <%= f.time_field :break_time ,class: "stamp-break-time-area",value: "01:00"%>
+          </div>
+        </div>
+
         <div class="col-md-12 stamp-comment">
           <div class="comment-area">
             <%= f.label :comment, "コメント" %>
-            <%= f.text_area :comment ,class: "stamp-comment-area"%>
+            <%= f.text_area :comment ,class: "stamp-comment-area", placeholder: "30文字以内"%>
           </div>
         </div>
 
@@ -49,4 +56,6 @@
     <%= link_to "ログイン", login_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+
 

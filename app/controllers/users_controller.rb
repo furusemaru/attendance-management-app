@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :show, :index, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :show, :index, :destroy, :new]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user, only: [:destroy, :index]
+  before_action :admin_user, only: [:destroy, :index, :new]
   before_action :correct_admin_user, only: :show
 
   def new
@@ -32,7 +32,8 @@ class UsersController < ApplicationController
     
     # 選択された年月に基づいてデータを取得
     @works = @user.works.where("strftime('%Y', date) = ? AND strftime('%m', date)  = ?", @selected_year, @selected_month)
-    
+    @total_working_hours = @user.total_working_hours(@selected_month, @selected_year)
+    @total_overtime_hours = @user.total_overtime_hours(@selected_month, @selected_year)
     
   end
 
@@ -64,6 +65,12 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+
+    @users = @users.where(department: params[:department]) if params[:department].present?
+
+    @users = @users.where("last_name LIKE ?", "%#{params[:last_name]}%") if params[:last_name].present?
+
+    @users = @users.paginate(page: params[:page])
   end
 
   def destroy
@@ -74,7 +81,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_cofirmation)
+      params.require(:user).permit(:first_name, :last_name, :department, :email, :password, :password_cofirmation)
     end
 
     def correct_user

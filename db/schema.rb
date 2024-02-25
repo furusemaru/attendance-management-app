@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_24_132419) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_25_070625) do
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remember_digest"
     t.boolean "admin", default: false
+    t.string "last_name"
+    t.string "department"
+    t.string "employee_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -31,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_24_132419) do
     t.datetime "updated_at", null: false
     t.float "total_hours"
     t.date "date"
+    t.time "break_time"
     t.index ["user_id", "created_at"], name: "index_works_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_works_on_user_id"
   end
