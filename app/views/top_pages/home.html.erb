@@ -33,6 +33,13 @@
           </div>
         </div>
 
+        <div class="col-md-12 mt-3">
+          <div class="select-location-area">
+            <%= f.label :location, "勤務形態", class: "display-4"%>
+            <%= f.select :location , options_for_select(['出社', 'リモート'], selected: @work.location), { include_blank: '' }, class: "select-location"%>
+          </div>
+        </div>
+
         <div class="col-md-12 stamp-comment">
           <div class="comment-area">
             <%= f.label :comment, "コメント" %>

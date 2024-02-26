@@ -7,6 +7,7 @@ class Work < ApplicationRecord
   validates :comment, length: { maximum: 30 }
   validates :date, presence: true, uniqueness: { scope: :user_id }
   validates :break_time, presence: true
+  validates :location, presence: true,  inclusion: { in: ['出社', 'リモート'], message: "%{value}は無効な勤務形態です" }
 
   def working_hours
     return unless start_time && end_time && break_time

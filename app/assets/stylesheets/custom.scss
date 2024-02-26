@@ -205,7 +205,19 @@ input {
   align-items: center;
 }
 
+.select-location-area{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .stamp-break-time-area{
+  width: 100px;
+  text-align: center;
+}
+
+.select-location{
   width: 100px;
   text-align: center;
 }

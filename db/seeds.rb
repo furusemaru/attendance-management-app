@@ -29,7 +29,7 @@ end_day = Date.new(2024, 2, 20)
 start_time_sample = ["07:00","08:00","08:00","09:00","09:00","09:00","09:00","10:00","11:00"]
 end_time_sample = ["17:00","17:00","18:00","18:00","18:00","18:00","18:00","18:00","19:00","20:00","21:00","21:00","22:00"]
 break_time_sample = ["01:00","01:00","01:00","01:00","01:00","01:00","01:00","01:00","00:50","01:30","00:45"]
-
+location_sample = ['出社', 'リモート']
 users = User.order(:created_at).take(30)
 200.times do
   users.each do |user|
@@ -41,7 +41,7 @@ users = User.order(:created_at).take(30)
       random_date = Random.rand(start_day..end_day)
     end
 
-    user.works.create!(start_time: start_time_sample.sample, end_time: end_time_sample.sample, date: random_date, break_time: break_time_sample.sample)
+    user.works.create!(start_time: start_time_sample.sample, end_time: end_time_sample.sample, date: random_date, break_time: break_time_sample.sample, location: location_sample.sample)
   end
 end
 
@@ -49,7 +49,7 @@ end
 users = User.order(:created_at).take(30)
 users.each do |user|
   5.times do |n|
-    user.works.create!(start_time: start_time_sample.sample, end_time: end_time_sample.sample, date: Date.new(2024, 2, 21+n), break_time: break_time_sample.sample)
+    user.works.create!(start_time: start_time_sample.sample, end_time: end_time_sample.sample, date: Date.new(2024, 2, 21+n), break_time: break_time_sample.sample, location: location_sample.sample)
   end
 end
 

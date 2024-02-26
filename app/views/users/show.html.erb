@@ -32,6 +32,7 @@
           <thead>
             <tr>
               <th>日付</th>
+              <th>勤務形態</th>
               <th>出勤時間</th>
               <th>退勤時間</th>
               <th>勤務時間</th>
@@ -46,6 +47,7 @@
             <% @works.each do |work| %>
               <tr>
                 <td><%= work.date.strftime("%Y-%m-%d") %></td>
+                <td><%= work.location %>
                 <td><%= work.start_time.strftime("%H:%M") %></td>
                 <td><%= work.end_time ? work.end_time.strftime("%H:%M") : "未退勤" %></td>
                 <td><%= work.working_hours %></td>

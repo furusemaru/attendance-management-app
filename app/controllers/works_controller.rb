@@ -81,7 +81,7 @@ class WorksController < ApplicationController
   private
 
     def work_params
-      params.require(:work).permit(:date, :comment, :start_time, :end_time, :break_time)
+      params.require(:work).permit(:date, :comment, :start_time, :end_time, :break_time, :location)
     end
 
     def correct_user

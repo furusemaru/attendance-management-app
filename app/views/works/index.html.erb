@@ -38,6 +38,7 @@
             <tr>
               <th>社員名</th>
               <th>部署</th>
+              <th>勤務形態</th>
               <th>出勤時間</th>
               <th>退勤時間</th>
               <th>勤務時間</th>
@@ -52,6 +53,7 @@
               <tr>
                 <td><%= link_to work.user.fullname, work.user %></td>
                 <td><%= work.user.department %></td>
+                <td><%= work.location %></td>
                 <td><%= work.start_time.strftime("%H:%M") %></td>
                 <td><%= work.end_time ? work.end_time.strftime("%H:%M") : "未退勤" %></td>
                 <td><%= work.working_hours %>
