@@ -30,7 +30,7 @@
               <th>社員ID</th>
               <th>社員名</th>
               <th>部署</th>
-              <th>削除</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -40,8 +40,12 @@
                 <td><%= user.employee_id %></td>
                 <td><%= link_to user.fullname, user %></td>
                 <td><%= user.department %></td>
-                <td><%= link_to "削除", user, data: { "turbo-method": :delete,
-                                              turbo_confirm: "本当に削除しますか？" } %></td>
+                <td>
+                  <%= link_to "編集", edit_user_path(user) %>
+                  <span> | </span>
+                  <%= link_to "削除", user, data: { "turbo-method": :delete,
+                                              turbo_confirm: "本当に削除しますか？" } %>
+                </td>
               </tr>
               <% end %>
             <% end %>

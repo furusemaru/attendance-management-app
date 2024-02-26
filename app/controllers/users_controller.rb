@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :show, :index, :destroy, :new]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: []
   before_action :admin_user, only: [:destroy, :index, :new]
-  before_action :correct_admin_user, only: :show
+  before_action :correct_admin_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(user_edit_params)
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -82,6 +82,14 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:first_name, :last_name, :department, :email, :password, :password_cofirmation)
+    end
+
+    def user_edit_params
+      if current_user.admin?
+        params.require(:user).permit(:first_name, :last_name, :department, :email)
+      else
+        params.require(:user).permit(:password, :password_confirmation)
+      end
     end
 
     def correct_user
