@@ -86,7 +86,7 @@ class UsersController < ApplicationController
 
     def user_edit_params
       if current_user.admin?
-        params.require(:user).permit(:first_name, :last_name, :department, :email)
+        params.require(:user).permit(:first_name, :last_name, :department, :email, :password, :password_confirmation)
       else
         params.require(:user).permit(:password, :password_confirmation)
       end
