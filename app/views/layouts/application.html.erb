@@ -34,6 +34,17 @@
 
         return hours + ':' + minutes;
       }
+      
+
+      function enterDate() {
+        // 隠しフィールドに現在の日付と時刻を設定
+        if (confirm('本当に退勤しますか？')) {
+          var now = new Date();
+          var localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+          var formattedDate = localDate.toISOString().split('T')[0];
+          document.getElementById('hidden-date').value = formattedDate;
+        }
+      }
     </script>
   </head>
   <body>

@@ -1,27 +1,26 @@
-<% if admin_user? %>
-  <h1>管理者専用</h1>
-<% elsif logged_in? %>
-  <% provide(:title, '打刻') %>
-  <h1 id="current-date"></h1>
-  <h1 id="current-time"></h1>
+<% provide(:title, '勤務記録編集') %>
   <div class='time-stamp'>
     <%= form_with(model: @work) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       
-      <%= f.hidden_field :date, id: 'hidden-date' %>
+      
       
       <div class="row">
-        
+        <div class="col-md-12 text-center mt-3 edit-date-group">
+          <%= f.label :date, "日付", class: "display-4" %>
+          <%= f.date_field :date, required: true, class: "date-field edit-date-field" %>
+        </div>
+
         <div class="col-md-6 text-center start-btn">
           <%= f.label :start_time, "出勤時間", class: "display-4" %>
-          <%= f.time_field :start_time, required: true, class: "start-field", value: "09:00" %>
+          <%= f.time_field :start_time, required: true, class: "start-field"%>
           <!-- 出勤ボタン -->
           <%= f.button "出勤", type: "button", onclick: "clockIn()", class: "btn btn-primary" %>
         </div>
 
         <div class="col-md-6 text-center end-btn">
           <%= f.label :end_time, "退勤時間", class: "display-4" %>
-          <%= f.time_field :end_time, required: true, class: "end-field", value: "18:00" %>
+          <%= f.time_field :end_time, required: true, class: "end-field"%>
           <!-- 退勤ボタン -->
           <%= f.button "退勤", type: "button", onclick: "clockOut()", class: "btn btn-danger" %>
         </div>
@@ -29,7 +28,7 @@
         <div class="col-md-12 stamp-break-time mt-3">
           <div class="break-time-area">
             <%= f.label :break_time, "休憩時間", class: "display-4"%>
-            <%= f.time_field :break_time ,class: "stamp-break-time-area",value: "01:00"%>
+            <%= f.time_field :break_time ,class: "stamp-break-time-area"%>
           </div>
         </div>
 
@@ -43,19 +42,10 @@
         <!-- 登録ボタン -->
         <div class="col-md-12 register">
           <div class="register-group">
-            <%= f.submit "登録", class: "register-btn btn btn-warning", onclick: "enterDate()" %>
+            <%= f.submit "変更", class: "register-btn btn btn-warning" %>
           </div>
         </div>
 
       </div>
     </div>
   <% end %>
-<% else %>
-  <h1>勤怠管理システム</h1>
-  <div class="text-center mt-3" >
-    <%= link_to "ログイン", login_path, class: 'btn btn-primary' %>
-  </div>
-<% end %>
-
-
-

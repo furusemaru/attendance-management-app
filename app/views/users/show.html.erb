@@ -59,10 +59,10 @@
                 </td>
                 <% if @user == current_user %>
                 <td>
-                
-                  <a href="#">編集</a>
+                  <%= link_to "編集", edit_work_path(work) %>
                   <span> | </span>
-                  <a href="#">削除</a>
+                  <%= link_to "削除", work, data: { "turbo-method": :delete,
+                                               turbo_confirm: "本当に削除しますか" } %>
                 </td>
                 <% end %>
                 <!-- 他のカラムも必要に応じて追加 -->

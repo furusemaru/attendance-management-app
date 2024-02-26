@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy, :index]
-  before_action :correct_user,   only: :destroy
+  before_action :logged_in_user, only: [:create, :destroy, :edit, :index, :update]
+  before_action :correct_user,   only: [:destroy, :edit, :update]
   before_action :admin_user, only: [:index]
   
 
@@ -15,8 +15,28 @@ class WorksController < ApplicationController
     end
   end
 
+  def edit
+    @work = Work.find(params[:id])
+  end
+
+  def update
+    @work = Work.find(params[:id])
+    if @work.update(work_params)
+      flash[:success] = "勤務記録が更新されました"
+      redirect_to @work.user
+    else
+      render 'edit', status: :unprocessable_entity
+    end
+  end
 
   def destroy
+    @works.destroy
+    flash[:success] = "勤怠記録を削除しました。"
+    if request.referrer.nil?
+      redirect_to root_url, status: :see_other
+    else
+      redirect_to request.referrer, status: :see_other
+    end
   end
 
   def index
@@ -65,8 +85,8 @@ class WorksController < ApplicationController
     end
 
     def correct_user
-      @micropost = current_user.microposts.find_by(id: params[:id])
-      redirect_to root_url, status: :see_other if @micropost.nil?
+      @works = current_user.works.find_by(id: params[:id])
+      redirect_to root_url, status: :see_other if @works.nil?
     end
 
     def admin_user
