@@ -62,11 +62,15 @@
                   <% if work.comment.blank? %>
                     <span>×</span>
                   <% else %>
-                    <span><a class="">○</a></span>
+                    <a onclick="commentPopup('<%= work.comment %>')" >表示</a>
                   <% end %>
                 </td>
-
               </tr>
+              <div id="overlay">
+              <div id="dialog">
+                <p id="comment-content"></p>
+                <button class="mt-1" id="close-btn" onclick="closeDialog()" >閉じる</button>
+              </div>
               <% end %>
             <% end %>
           </tbody>

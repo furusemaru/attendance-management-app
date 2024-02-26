@@ -348,3 +348,27 @@ table {
 .edit-date-field{
   width: auto;
 }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 半透明な黒 */
+  display: none;
+  z-index: 1000; /* オーバーレイを最前面に表示 */
+}
+
+#dialog {
+  width: 500px;
+  margin: auto;
+  margin-top: 40vh;
+  padding: 30px 20px;
+  display: none;
+  text-align: center;
+  border: 1px solid #aaa;
+  box-shadow: 2px 2px 4px #888;
+  background: #fff; /* ダイアログの背景色 */
+  z-index: 1001; /* ダイアログをオーバーレイよりも前面に表示 */
+}

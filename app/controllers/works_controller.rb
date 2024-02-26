@@ -40,6 +40,7 @@ class WorksController < ApplicationController
   end
 
   def index
+    
     @selected_year = params[:year] || Date.today.year
     @selected_month = params[:month] || Date.today.month
     @selected_day = params[:day] || Date.today.day
