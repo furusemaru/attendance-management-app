@@ -3,7 +3,7 @@ require "test_helper"
 class WorkTest < ActiveSupport::TestCase
   def setup
     @user = users(:michael)
-    @work = @user.works.build(start_time: "2024-02-19 15:46:19", end_time: "2024-02-19 13:46:19", comment: 'test', total_hours: 2, date: "2024-02-19", break_time: "01:00", location: '出社' )
+    @work = @user.works.build(start_time: "2024-02-19 10:46:19", end_time: "2024-02-19 13:46:19", comment: 'test', date: "2024-02-19", break_time: "01:00", location: '出社' )
   end
 
   test "should be valid" do

@@ -5,9 +5,10 @@ class Work < ApplicationRecord
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :comment, length: { maximum: 30 }
-  validates :date, presence: true, uniqueness: { scope: :user_id }
+  validates :date, presence: true, uniqueness: { scope: :user_id } # 1人のユーザーは一日に一回しか勤怠登録できない
   validates :break_time, presence: true
   validates :location, presence: true,  inclusion: { in: ['出社', 'リモート'], message: "%{value}は無効な勤務形態です" }
+  validate :end_time_after_start_time
 
   def working_hours
     return unless start_time && end_time && break_time
@@ -27,6 +28,16 @@ class Work < ApplicationRecord
     end
     Time.at(overtime_second).utc.strftime('%H:%M')
   end
+
+  private
+
+    def end_time_after_start_time
+      return if end_time.blank? || start_time.blank?
+
+      if end_time <= start_time
+        errors.add(:end_time, "must be after the start time")
+      end
+    end
 
   
 

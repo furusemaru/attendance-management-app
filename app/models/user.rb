@@ -3,8 +3,8 @@ class User < ApplicationRecord
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
   before_validation :assign_employee_id, on: :create
-  validates :first_name, presence: true, length: { maximum: 50 }
-  validates :last_name, presence: true, length: { maximum: 50 }
+  validates :first_name, presence: true, length: { maximum: 30 }
+  validates :last_name, presence: true, length: { maximum: 30 }
   validates :department, presence: true, inclusion: { in: ['営業', '開発', '人事', '総務'], message: "%{value}は無効な部署です" }
   validates :employee_id, uniqueness: true, presence: true, format: { with: /\A\d{7}\z/, message: "は7桁の数字で入力してください" }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -97,18 +97,19 @@ class User < ApplicationRecord
   end
 
   private
-  def assign_employee_id
-    self.employee_id ||= next_employee_id
-  end
 
-  def next_employee_id
-    last_user = User.order(employee_id: :desc).first
-    if last_user
-      last_id = last_user.employee_id.to_i
-      new_id = format('%07d', last_id + 1)
-    else
-      new_id = '0000001'
+    def assign_employee_id
+      self.employee_id ||= next_employee_id
     end
-    new_id
-  end
+
+    def next_employee_id
+      last_user = User.order(employee_id: :desc).first
+      if last_user
+        last_id = last_user.employee_id.to_i
+        new_id = format('%07d', last_id + 1)
+      else
+        new_id = '0000001'
+      end
+      new_id
+    end
 end

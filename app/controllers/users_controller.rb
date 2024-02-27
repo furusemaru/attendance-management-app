@@ -1,34 +1,29 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :show, :index, :destroy, :new]
+  before_action :logged_in_user, only: [:edit, :update, :show, :index, :destroy, :new, :create]
   before_action :correct_user,   only: []
-  before_action :admin_user, only: [:destroy, :index, :new]
+  before_action :admin_user, only: [:destroy, :index, :new, :create]
   before_action :correct_admin_user, only: [:show, :edit, :update]
 
+  
   def new
     @user = User.new
   end
 
+  
   def show
     @user = User.find(params[:id])
     if @user.admin?
       redirect_to root_url
     end
-    @selected_year = params[:year] || Date.today.year
-    @selected_month = params[:month] || Date.today.month
-    if @selected_month.class != Integer
-      if @selected_month.to_i < 10
-        @selected_month = "0" + @selected_month 
-      end
-    else
-      if @selected_month < 10
-        @selected_month = '0' + @selected_month.to_s
-      else
-        @selected_month = @selected_month.to_s
-      end
+    @selected_year = params[:year] || Date.today.year.to_s
+    @selected_month = params[:month] || Date.today.month.to_s
+
+    # 1~9月の場合
+    if @selected_month.to_i < 10
+      @selected_month = "0" + @selected_month 
     end
-    if @selected_year.class == Integer
-      @selected_year = @selected_year.to_s
-    end
+    
+    
     
     # 選択された年月に基づいてデータを取得
     @works = @user.works.where("strftime('%Y', date) = ? AND strftime('%m', date)  = ?", @selected_year, @selected_month)
@@ -40,9 +35,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      reset_session
-      log_in @user
-      flash[:success] = 'ログインに成功しました'
+      flash[:success] = '作成に成功しました'
       redirect_to @user
     else
       render 'new', status: :unprocessable_entity
@@ -56,7 +49,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_edit_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "変更が適用されました"
       redirect_to @user
     else
       render 'edit', status: :unprocessable_entity
@@ -75,7 +68,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "削除に成功しました"
     redirect_to users_url, status: :see_other
   end
 
