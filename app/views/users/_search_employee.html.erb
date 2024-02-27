@@ -1,0 +1,20 @@
+<div class="col-md-12 text-center">
+  <%= form_tag(users_path, method: :get) do %>
+    <div class="row" >
+      <div class="col-md-6">
+        <%= label_tag :department, "部署：" %>
+        <%= select_tag :department, options_for_select(User.distinct.pluck(:department).compact, params[:department]), include_blank: true, class: "select-department" %>
+      </div>
+
+      
+      <div class="col-md-6">
+        <%= label_tag :last_name, "姓：" %>
+        <%= text_field_tag :last_name, params[:last_name], placeholder: "姓を入力", class: "select-department" %>
+      </div>
+    
+      <div class="col-md-12">
+        <%= submit_tag "検索", class: "btn btn-primary display-btn" %>
+      </div>
+    </div>
+  <% end %>
+</div>

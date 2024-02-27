@@ -15,3 +15,6 @@ document.addEventListener("turbo:load", function() {
   addToggleListener("hamburger", "navbar-menu",   "collapse");
   addToggleListener("account",   "dropdown-menu", "active");
 });
+
+
+

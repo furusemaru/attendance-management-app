@@ -78,6 +78,24 @@ class User < ApplicationRecord
     "#{hours}時間#{minutes}分"
   end
 
+  def overtime_this_month(threshold = 8*60*60)
+    this_month = Date.today.month
+    this_month = this_month < 10 ? '0' + this_month.to_s : this_month.to_s 
+    works_in_month = works.where("strftime('%Y', works.date) = ? AND strftime('%m', works.date) = ?", Date.today.year.to_s, this_month)
+    total_overtime = 0
+    works_in_month.each do |work|
+      break_second = work.break_time.hour*60*60 + work.break_time.min*60
+      working_second = work.end_time - work.start_time - break_second
+      if working_second > threshold
+        overtime_second = working_second - threshold
+      else
+        overtime_second = 0
+      end
+      total_overtime += overtime_second
+    end
+    total_overtime
+  end
+
   private
   def assign_employee_id
     self.employee_id ||= next_employee_id

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user.admin?
-      render '/top_pages/home'
+      redirect_to root_url
     end
     @selected_year = params[:year] || Date.today.year
     @selected_month = params[:month] || Date.today.month

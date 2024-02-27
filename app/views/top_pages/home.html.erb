@@ -1,5 +1,35 @@
 <% if admin_user? %>
-  <h1>管理者専用</h1>
+  <h1>アラート</h1>
+  <div class="row">
+    <%= render '/users/search_employee' %>
+    <div class="col-md-12 text-center">
+      <% if !@users.blank? %>
+        <table class="mt-3 mb-3 table_design08" >
+          <thead>
+            <tr>
+              <th>社員ID</th>
+              <th>社員名</th>
+              <th>部署</th>
+              <th>残業時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <% if !user.admin? %>
+              <tr>
+                <td><%= user.employee_id %></td>
+                <td><%= link_to user.fullname, user %></td>
+                <td><%= user.department %></td>
+                <td><%= user.total_overtime_hours(@this_month, @this_year) %></td>
+              </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @users %>
+      <% end %>
+    </div>
+  </div>
 <% elsif logged_in? %>
   <% provide(:title, '打刻') %>
   <h1 id="current-date"></h1>
@@ -56,6 +86,38 @@
 
       </div>
     </div>
+    <script>
+      document.addEventListener('turbo:render', function() {
+        // 毎秒ごとに時刻を更新する関数
+        console.log('DOMContentLoaded event fired');
+        function updateClock() {
+          var now = new Date();
+          var hours = now.getHours();
+          var minutes = now.getMinutes();
+          var seconds = now.getSeconds();
+
+          // ゼロパディング
+          hours = hours < 10 ? '0' + hours : hours;
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+          seconds = seconds < 10 ? '0' + seconds : seconds;
+
+          // 日付を取得
+          var options = { month: 'long', day: 'numeric', weekday: 'short' };
+          var currentDate = now.toLocaleDateString('ja-JP', options);
+
+          // 日付、時刻を表示する要素にセット
+          document.getElementById('current-date').innerText = currentDate;
+          document.getElementById('current-time').innerText = hours + ':' + minutes + ':' + seconds;
+        
+        }
+
+        // 初回実行
+        updateClock();
+
+        // 1秒ごとにupdateClock関数を実行
+        setInterval(updateClock, 1000);
+      });
+    </script>
   <% end %>
 <% else %>
   <h1>勤怠管理システム</h1>
