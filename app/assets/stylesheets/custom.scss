@@ -244,7 +244,7 @@ input {
 
 }
 
-/* /user/show */
+/* ユーザーの個人ページ */
 
 .select-year{
   width: auto;
@@ -262,16 +262,6 @@ input {
   width: 40%;
 }
 
-/* footer */
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
 
 /*  表のデザイン */
 
@@ -349,6 +339,8 @@ table {
   width: auto;
 }
 
+
+/* コメントの表示 */ 
 #overlay {
   position: fixed;
   top: 0;

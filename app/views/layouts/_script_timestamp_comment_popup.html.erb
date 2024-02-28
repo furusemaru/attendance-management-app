@@ -1,0 +1,56 @@
+<script>
+  function clockIn() {
+    // 出勤ボタンがクリックされたときの処理
+    if (confirm('本当に出勤しますか？')) {
+      document.getElementById('work_start_time').value = getCurrentTime();
+    }
+  }
+
+  function clockOut() {
+    // 退勤ボタンがクリックされたときの処理
+    if (confirm('本当に退勤しますか？')) {
+      document.getElementById('work_end_time').value = getCurrentTime();
+    }
+  }
+
+  function getCurrentTime() {
+    // 現在の時刻を取得する関数
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    return hours + ':' + minutes;
+  }
+  
+
+  function enterDate() {
+    // 隠しフィールドに現在の日付と時刻を設定
+    if (confirm('本当に登録しますか？')) {
+      var now = new Date();
+      var localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+      var formattedDate = localDate.toISOString().split('T')[0];
+      document.getElementById('hidden-date').value = formattedDate;
+    }
+  }
+
+  function commentPopup(comment){
+    var dialog = document.getElementById('dialog');
+    var overlay = document.getElementById('overlay');
+    var comment_box = document.getElementById('comment-content')
+    comment_box.innerHTML = comment
+    overlay.style.display = 'block';
+    dialog.style.display = 'block';
+  }
+
+  function closeDialog() {
+    var dialog = document.getElementById('dialog');
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = 'none';
+    dialog.style.display = 'none';
+  }
+
+  
+</script>

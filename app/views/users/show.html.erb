@@ -81,11 +81,4 @@
   </div>
     
 </div>
-<div class="row">
-  <div class="col-md-6 text-center mt-1" >
-    <h3>労働時間: <%= @total_working_hours %></h3>
-  </div>
-  <div class="col-md-6 text-center mt-1" >
-    <h3>残業時間 : <%= @total_overtime_hours %></h3>
-  </div>
-</div>
+<%= render 'total_work_overtime' %>
