@@ -9,7 +9,7 @@ def generate_holiday_dates(start_date, end_date)
   weekdays = (start_date..end_date).to_a.select { |d| [0,6].include?(d.wday) } # 0,6が休日
 end
 
-# メインのサンプルユーザーを1人作成する
+# 管理者ユーザーを1人作成する
 User.create!(first_name:  "佑太",
              last_name: "古瀬",
              department: "総務",
@@ -17,6 +17,17 @@ User.create!(first_name:  "佑太",
              password:              "foobar",
              password_confirmation: "foobar",
              admin: true)
+
+# 何の登録もしていないユーザー
+department = ["営業", "開発", "人事", "総務"].sample
+email = "freee@sample.org"
+password = "password"
+User.create!(first_name: 振井,
+             last_name: 和也,
+             department: department,
+             email: email,
+             password:              password,
+             password_confirmation: password)
 
 # 追加のユーザーをまとめて生成する
 99.times do |n|
@@ -31,6 +42,10 @@ User.create!(first_name:  "佑太",
                password:              password,
                password_confirmation: password)
 end
+
+
+
+
 
 start_day = Date.new(2023, 12, 1)
 end_day = Date.new(2024, 3, 15)
