@@ -18,16 +18,6 @@ User.create!(first_name:  "佑太",
              password_confirmation: "foobar",
              admin: true)
 
-# 何の登録もしていないユーザー
-department = ["営業", "開発", "人事", "総務"].sample
-email = "freee@sample.org"
-password = "password"
-User.create!(first_name: '振井',
-             last_name: '和也',
-             department: department,
-             email: email,
-             password:              password,
-             password_confirmation: password)
 
 # 追加のユーザーをまとめて生成する
 99.times do |n|
@@ -81,6 +71,17 @@ users.each do |user|
     comment: comment_sample.sample)
   end
 end
+
+# 何の登録もしていないユーザー
+department = ["営業", "開発", "人事", "総務"].sample
+email = "freee@sample.org"
+password = "password"
+User.create!(first_name: '振井',
+             last_name: '和也',
+             department: department,
+             email: email,
+             password:              password,
+             password_confirmation: password)
 
 
 
