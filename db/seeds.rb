@@ -22,8 +22,8 @@ User.create!(first_name:  "佑太",
 department = ["営業", "開発", "人事", "総務"].sample
 email = "freee@sample.org"
 password = "password"
-User.create!(first_name: 振井,
-             last_name: 和也,
+User.create!(first_name: '振井',
+             last_name: '和也',
              department: department,
              email: email,
              password:              password,
