@@ -1,6 +1,19 @@
 <h1>アラート</h1>
   <div class="row">
     <div class="col-md-12 text-center">
+      <%= form_tag(root_url, method: :get) do %>
+          <div class="col-md-12">
+            <%= number_field_tag :over_time, @alert_time/3600, min:0, max: 120, class: "select-department" %>
+            <%= label_tag :over_time, "時間以上" %>
+          </div>
+        
+          <div class="col-md-12">
+            <%= submit_tag "表示", class: "btn btn-primary display-btn" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-12 text-center">
       <% if !@users.blank? %>
         <table class="mt-3 mb-3 table_design08" >
           <thead>
