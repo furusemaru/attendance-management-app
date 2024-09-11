@@ -47,7 +47,7 @@ https://github.com/furusemaru/attendance-management-app/assets/138269691/13617c7
 ![スクリーンショット 2024-02-28 192422](https://github.com/furusemaru/attendance-management-app/assets/138269691/c7b44b3f-4776-48d6-a2ab-2d17924f2941)
 
 
-・ログインページ<br>
+・ログインページ (メールアドレス:example@sample.org パスワード:foobar 管理者ログイン)<br>
 ![スクリーンショット 2024-02-28 192503](https://github.com/furusemaru/attendance-management-app/assets/138269691/0e531b59-0f30-433c-aa39-adccf8c5dc63)
 登録されたメールアドレス・パスワードの組み合わせでログインできます。
 
